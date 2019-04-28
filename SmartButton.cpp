@@ -75,12 +75,18 @@ void SmartButton::DoAction(input in) {
 
 // Public
 void SmartButton::run() {
-  unsigned int mls = 0xFFFF & millis();
-  if (!digitalRead(btPin))  DoAction(input::Press);
-  else  DoAction(input::Release);
-  if (mls - pressTimeStamp > SmartButton_debounce) DoAction(input::WaitDebounce);
-  if (mls - pressTimeStamp > SmartButton_hold) DoAction(input::WaitHold);
-  if (mls - pressTimeStamp > SmartButton_long) DoAction(input::WaitLongHold);
-  if (mls - pressTimeStamp > SmartButton_idle) DoAction(input::WaitIdle);
+  if (!digitalRead(btPin))  {
+    //if (btState == state::Idle) {
+      DoAction(input::Press);
+    //} else {
+      auto elapsed = static_cast<unsigned int>(0xFFFF & millis()) - pressTimeStamp;
+      if (elapsed > SmartButton_debounce) DoAction(input::WaitDebounce);
+      if (elapsed > SmartButton_hold) DoAction(input::WaitHold);
+      if (elapsed > SmartButton_long) DoAction(input::WaitLongHold);
+      if (elapsed > SmartButton_idle) DoAction(input::WaitIdle);
+    //}
+  } else {
+    DoAction(input::Release);
+  }
 }
 
