@@ -2,15 +2,6 @@
 
 // SmartButton
 
-SmartButton::SmartButton() {
-  btState = state::Idle;
-}
-SmartButton::~SmartButton() {}
-SmartButton::SmartButton(int pin) {
-  btState = state::Idle;
-  btPin = pin;
-  pinMode(pin, INPUT_PULLUP);
-}
 // Private
 void SmartButton::DoAction(input in) {
   switch (in) {

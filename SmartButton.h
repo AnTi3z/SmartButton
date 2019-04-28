@@ -27,17 +27,17 @@ class SmartButton {
     byte btPin;
     enum class state : byte  {Idle, PreClick, Click, Hold, LongHold, ForcedIdle};
     enum class input : byte {Release, WaitDebounce, WaitHold, WaitLongHold, WaitIdle, Press};
-    state btState;
+    state btState{state::Idle};
     unsigned int pressTimeStamp;
 
   private:
     void DoAction(input in);
     
   public:
-    SmartButton();
-    SmartButton(int pin);
-    SmartButton(int pin, int mode) {btPin=pin; pinMode(pin,mode);}
-    ~SmartButton();
+    SmartButton() {}
+    explicit SmartButton(int pin) : btPin{pin} {pinMode(pin, INPUT_PULLUP);}
+    SmartButton(int pin, int mode) : btPin{pin} {pinMode(pin, mode);}
+    ~SmartButton() {}
     void begin(int p, int m) {btPin=p; pinMode(p,m);}
     void run();
     
