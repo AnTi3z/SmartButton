@@ -16,18 +16,21 @@ void SmartButton::DoAction(input in) {
   switch (in) {
     case input::Release:
       //Serial.println("Release");
-      btState=state::Idle;
       switch (btState) {
-        case state::Click: 
-          offClick(); 
+        case state::Click:
+          btState=state::Idle;
+          offClick();
           break;
-        case state::Hold: 
+        case state::Hold:
+          btState=state::Idle;
           offHold(); 
           break;
-        case state::LongHold: 
+        case state::LongHold:
+          btState=state::Idle;
           offLongHold(); 
           break;
-        case state::ForcedIdle: 
+        case state::ForcedIdle:
+          btState=state::Idle;
           onIdle(); 
           break;
       }
