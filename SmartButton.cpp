@@ -65,7 +65,7 @@ void SmartButton::DoAction(input in) {
       switch (btState) {
         case state::Idle:
           //Serial.println("Press");
-          pressTimeStamp=0xFFFF & millis();
+          pressTimeStamp=static_cast<unsigned int>(0xFFFF & millis());
           btState=state::PreClick;
           break;
       }

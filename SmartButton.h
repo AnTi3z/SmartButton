@@ -50,7 +50,7 @@ class SmartButton {
     inline virtual void offClick() {};      // On depress after click.
     inline virtual void offHold() {};       // On depress after hold.
     inline virtual void offLongHold() {};   // On depress after long hold.
-    inline virtual void offIdle() {};       // On depress after too long key pressing.
+    //inline virtual void offIdle() {};       // On depress after too long key pressing.
 };
 
 #endif
